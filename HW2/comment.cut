@@ -1,0 +1,44 @@
+\begin{enumerate}
+\item
+\begin{itemize}
+\item T$_1$ = $M \wedge \neg B$
+
+\item T$_2$ = $\neg S$
+
+\item T$_3$ = $(\neg B) \vee (B \wedge \neg M)$\\
+Reducing using distribution\\
+T$_3$ = $(B \vee \neg B) \wedge (\neg M \vee \neg B)$\\
+$B \vee \neg B$ is always true\\
+T$_3$ = $\neg M \vee \neg B$
+
+\item T$_4$ = $(\neg M) \vee (M \wedge (P \vee S))$\\
+Reducing using distribution\\
+T$_4$ = $(\neg M \vee M) \wedge (\neg M \vee (P \vee S))$\\
+$M \vee \neg M$ is always true\\
+T$_4$ = $(\neg M) \vee (P \vee S)$
+\end{itemize}
+
+\item Team = $T_1 \wedge T_2 \wedge T_3 \wedge T_4$\\
+
+$T_1 \wedge T_3 = (M \wedge \neg B) \wedge (\neg M \vee \neg B)$\\
+Distribute\\
+$((M \wedge \neg B) \wedge (\neg M)) \vee ((M \wedge \neg B) \wedge (\neg B))$\\
+$((M \wedge \neg B) \wedge (\neg M)) = ((M \wedge \neg M) \wedge (\neg B))$\\
+$T_1 \wedge T_3 = (M \wedge \neg B) \wedge (\neg B)$\\
+$T_1 \wedge T_3 = (M \wedge \neg B)$\\
+
+$T_2 \wedge T_4 = (\neg S) \wedge (\neg M \vee (P \vee S))$\\
+$T_2 \wedge T_4 = (\neg S) \wedge (S \vee (\neg M \vee P))$\\
+$T_2 \wedge T_4 = ((\neg S) \wedge S) \vee ((\neg S) \wedge (\neg M \vee P))$\\
+$\neg S \wedge S$ is always false\\
+$T_2 \wedge T_4 = (\neg S) \wedge (\neg M \vee P)$\\
+
+$T_1 \wedge T_2 \wedge T_3 \wedge T_4 = (T_1 \wedge T_3) \wedge (T_2 \wedge T_4)$\\
+$= (M \wedge \neg B) \wedge ((\neg S) \wedge (\neg M \vee P))$\\
+Distribute\\
+$= (\neg S) \wedge (((M \wedge \neg B) \wedge (\neg M)) \vee ((M \wedge \neg B) \wedge P))$\\
+$(M \wedge \neg B) \wedge \neg M$ is always false\\
+$= (\neg S) \wedge ((M \wedge \neg B) \wedge P)$\\
+$= (\neg S) \wedge (M) \wedge (\neg B) \wedge (P)$\\
+\bfseries{Team will have Mudkip and Pikachu, and leave Blastoise and Sandshrew at home.}\\
+\end{enumerate}

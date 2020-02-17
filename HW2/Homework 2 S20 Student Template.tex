@@ -1,0 +1,286 @@
+
+\documentclass[11pt]{amsart}
+\usepackage[left=2cm,top=2cm,right=2cm,bottom=2cm,nohead,foot=2cm]{geometry}
+\geometry{letterpaper}
+\usepackage[parfill]{parskip}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{epstopdf}
+\usepackage{moreverb}
+\usepackage{multicol}
+\usepackage{comment}
+\usepackage{wrapfig}
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+
+%creating solution environment
+\specialcomment{sol}{\textbf{Solution: }}{}
+%this command toggles the solutions
+%\excludecomment{sol} %comment this to SHOW solutions
+
+%For the lazy:
+\newcommand{\ds}{\displaystyle}
+\newcommand{\be}{\begin{enumerate}}
+\newcommand{\ee}{\end{enumerate}}
+\newcommand{\mrm}{\mathrm}
+\newcommand{\bee}{\begin{eqnarray*}}
+\newcommand{\eee}{\end{eqnarray*}}
+\newcommand{\dds}[2]{\frac{\mathrm{d}#2}{\mathrm{d}#1}} %(d1 BY d2)
+\newcommand{\ddb}[2]{\frac{\mathrm{d}}{\mathrm{d}#1}\left[ #2\right]}
+%(d by d1 OF 2)
+
+\begin{document}
+
+\begin{minipage}{0.5\textwidth}
+		\noindent {\bf CSCI 2824 -- Spring 2020}
+\end{minipage}\hfill
+\begin{minipage}{0.5\textwidth}
+		\noindent \hfill {\bf Homework 2}
+\end{minipage}
+\noindent This assignment is due on Friday, January 31 to Gradescope by 11:59pm.  You are expected to write up your solutions neatly and \textbf{use the coverpage}.  Remember that you are encouraged to discuss problems with your classmates, but you must work and write your solutions on your own. 
+
+{\bf Important}: On the {\bf official CSCI 2824 cover page} of your assignment clearly write your full name, the lecture section you belong to (001 or 002), and your student ID number.  You may \textbf{neatly} type your solutions for +2 extra credit on the assignment. You will lose \textit{all} 5 style/neatness points if you fail to use the official cover page.
+
+\vspace{5mm}
+\be
+%==============================================================================
+% Quickies; candidates: prop domain, bits/objects, binary conversions
+%==============================================================================	
+\item In lecture we covered a couple of ways to convert numbers from base-10 in base-2.  Adapt one or both of these techniques to convert $(472)_{10}$ into base-5.  Make sure to show all steps.
+
+	\begin{sol}
+		\begin{itemize}
+			\item$472 \div 5$ == 94 w/ remainder 2 $\Rightarrow$ base-5 == \_ \_ \_ 2
+			\item$94 \div 5$ == 18 w/ remainder 4 $\Rightarrow$ base-5 == \_ \_ 4 2
+			\item$18 \div 5$ == 3 w/ remainder 3 $\Rightarrow$ base-5 == \_ 3 4 2
+			\item$3 \div 5$ == 0 w/ remainder 3 $\Rightarrow$ base-5 == \bfseries{3342} $\Leftarrow$ ANSWER
+		\end{itemize}
+	\end{sol}
+
+\item Suppose that the domain of the propositional function $P(x)$ consists of the integers 1, 4, 9, and 16. Express the following statements without using quantifiers, instead using negations, disjunctions, and conjunctions. [e.g. $ \exists x P(x)$ would be $P(1) \vee P(4) \vee P(9) \vee P(16) $]
+	\be
+	\item $\forall x P(x) $
+	\item $ \neg \exists x P(x) $
+	\item $ \neg \forall x P(x) $
+	\ee
+
+	\begin{sol}
+		\begin{enumerate}
+			\item $P(1) \wedge P(4) \wedge P(6) \wedge P(16)$
+			\item $\neg(P(1) \vee P(4) \vee P(6) \vee P(16)$
+			\item $\neg(P(1) \wedge P(4) \wedge P(6) \wedge P(16)$
+		\end{enumerate}
+	\end{sol}
+%==============================================================================
+% Knights and Knaves
+%==============================================================================
+\item You're going to go on spring break vacation! Your destination: the island of Knights \& Knaves. On this island, there are only two types of native inhabitants; Knights, who always tell the truth, and Knaves, who always lie.  For each of the following problems, determine which of the islanders you encounter are Knights and which are Knaves, if possible. If multiple solutions may exist, fully describe each of them. Include a full truth table, and justify and explain your answer.
+	\be
+	\item As you are finding a nice spot on the beach to set up a picnic, you are approached by 3 of the native inhabitants. We'll call them Alfred, Batman, and Catwoman.  Batman tells you: ``we are all knaves.'' Catwoman tells you: ``exactly one of us is a knave.''
+	
+	\item You decide you need a tasty beverage, but on your way you now encounter Poseidon, Quetzalcoatl, and Rah.  Poseidon tells you ``we are all knaves.'' Rah corrects him: ``exactly one of us is a knight.''
+	\ee
+	
+	\begin{sol}
+		\begin{enumerate}
+			\item
+		 	\begin{itemize}
+				\item Batman's statement (SB) == $(\neg A \wedge \neg B \wedge \neg C)$
+				\item Catwoman's statement (SC) == $(\neg A \oplus \neg B \oplus \neg C)$
+				\item Let A, B, and C mean Alfred, Batman, and Catwoman are knights respectively.
+				\begin{displaymath}
+				\begin{array}{c c c|c c|c c|c}
+					A & B & C & SB & SC & B \Leftrightarrow SB & C \Leftrightarrow SC & \wedge\\
+					\hline
+					F & F & F & T & F & F & T & F\\
+					F & F & T & F & F & T & F & F\\
+					F & T & F & F & F & F & T & F\\
+					F & T & T & F & T & F & T & F\\
+					T & F & F & F & F & T & T & \mathbf{T}\\
+					T & F & T & F & T & T & F & F\\
+					T & T & F & F & T & F & T & F\\
+					T & T & T & F & F & F & F & F\\
+				\end{array}
+				\end{displaymath}
+				\item[A:] \bfseries{Alfred is a knight, Batman and Catwoman are both knaves}\\
+			\end{itemize}
+			\item
+			\begin{itemize}
+				\item Poseidon's statement (SP) == $(\neg P \wedge \neg Q \wedge \neg R)$
+				\item Rah's statement (SR) == $(P \oplus Q \oplus R)$
+				\item Let P, Q, and R mean  Poseidon, Quetzalcoatl, and Rah are knights respectively.
+				\begin{displaymath}
+				\begin{array}{c c c|c c|c c|c}
+					P & Q & R & SP & SR & P \Leftrightarrow SP & R \Leftrightarrow SR & \wedge\\
+					\hline
+					F & F & F & T & F & F & T & F\\
+					F & F & T & F & T & T & F & F\\
+					F & T & F & F & T & T & T & \mathbf{T}\\
+					F & T & T & F & F & T & F & F\\
+					T & F & F & F & T & F & F & F\\
+					T & F & T & F & F & F & T & F\\
+					T & T & F & F & F & F & F & F\\
+					T & T & T & F & F & F & F & F\\
+				\end{array}
+				\end{displaymath}
+				\item[A:] \bfseries{Quetzalcoatl is knight, Poseidon and Rah are both knaves}\\
+			\end{itemize}
+		\end{enumerate}
+	\end{sol}
+%==============================================================================
+% Proving Logical Equivalences
+%==============================================================================
+\item 
+	\be
+		\item Consider the logical proposition $\left[ (l \vee  m) \wedge (l \rightarrow n) \wedge (m \rightarrow n)\right]  \rightarrow n $.
+		\be
+		\item[(i)] Show that the proposition is a tautology using a truth table.
+		\item[(ii)] Show that the proposition is a tautology using a chain of logical equivalences. Note that you may only use logical equivalences from Table 6 (p. 27 of the Rosen textbook) and the other four starred equivalences given in lecture. At each step you should cite the name of the equivalence rule you are using, and please only use one rule per step.
+		\item[(iii)] Is this compound proposition satisfiable? Why or why not?
+		\item[(iv)] Create a plain English sentence explaining this tautology.
+		\ee
+		\item Show that $(p \rightarrow q) \rightarrow r$ and $p \rightarrow (q \rightarrow r)$ are not logically equivalent. Show all work, but your choice of method is your own.
+	\ee
+
+	\begin{sol}
+		\begin{enumerate}
+			\item
+			\begin{enumerate}
+				\item
+				\begin{displaymath}
+				\begin{array}{c c c|c c c|c}
+					l & m & n & l \vee m & l \rightarrow n & m \rightarrow n & \left[ (l \vee  m) \wedge (l \rightarrow n) \wedge (m \rightarrow n)\right]  \rightarrow n\\
+					\hline
+					F & F & F & F & T & T & T\\
+					F & F & T & F & T & T & T\\
+					F & T & F & T & T & T & T\\
+					F & T & T & T & T & T & T\\
+					T & F & F & T & F & F & T\\
+					T & F & T & T & T & T & T\\
+					T & T & F & T & F & F & T\\
+					T & T & T & T & T & T & T\\
+				\end{array}
+				\end{displaymath}
+				\item 
+				$\left[ (l \vee  m) \wedge (l \rightarrow n) \wedge (m \rightarrow n)\right]  \rightarrow n $\\
+				$\left[ (l \vee  m) \wedge (\neg l \vee n) \wedge (\neg m \vee n)\right]  \rightarrow n $ :: Relation by Implication\\
+				$\left[ (l \vee  m) \wedge ((\neg l \wedge \neg m) \vee n)\right]  \rightarrow n $ :: Distributive Law\\
+				$\left[ (l \vee  m) \wedge (\neg(l \vee m) \vee n)\right]  \rightarrow n $ :: De Morgan's Law\\
+				$\left[((l \vee m) \wedge \neg(l \vee m)) \vee ((l \vee m) \wedge n \right]  \rightarrow n $ :: Distributive Law\\
+				$\left[ False \vee ((l \vee m) \wedge n) \right] \rightarrow n $ :: Negation Law\\
+				$\left[(l \vee m) \wedge n \right] \rightarrow n$ :: Identity Law\\
+				$\neg \left[(l \vee m) \wedge n \right] \vee n$ :: Relation by Implication\\
+				$\left[\neg(l \vee m) \vee \neg n \right] \vee n$ :: De Morgan's Law\\
+				$\neg(l \vee m) \vee (\neg n \vee n)$ :: Distributive Law\\
+				$\neg(l \vee m) \vee True$ :: Negation Law\\
+				$True$ :: Domination Law
+
+				\item \textbf{Yes}, a tautology is always satisfiable because there will always be $\geq1$ true in its truth table.
+				\item The series of OR statements within the brackets is never true at the same time that n is false, meaning the final conditional statement outside the brackets will always yield true.
+			\end{enumerate}
+			\item
+			\begin{displaymath}
+			\begin{array}{c c c}
+				\begin{array}{|c c c|c|} \hline
+					p & q & r & (p \rightarrow q) \rightarrow r\\
+					\hline
+					F & F & F & F\\
+					F & F & T & T\\
+					F & T & F & F\\
+					F & T & T & T\\
+					T & F & F & T\\
+					T & F & T & T\\
+					T & T & F & F\\
+					T & T & T & T\\
+					\hline
+				\end{array}
+				&
+				\neq
+				&
+				\begin{array}{|c c c|c|} \hline
+					p & q & r & p \rightarrow (q \rightarrow r)\\
+					\hline
+					F & F & F & T\\
+					F & F & T & T\\
+					F & T & F & T\\
+					F & T & T & T\\
+					T & F & F & T\\
+					T & F & T & T\\
+					T & T & F & F\\
+					T & T & T & T\\
+					\hline
+				\end{array}
+			\end{array}
+			\end{displaymath}
+		\end{enumerate}
+	\end{sol}
+%==============================================================================
+% Satisfiability
+%==============================================================================
+\item It's time to unwind by playing Pok\'emon.  You and your \#squad (your friends: Brock, Ash, Giovanni, and Misty) sit down and debate which Pok\'emon you should bring on your shared team, which must contain anywhere from 1 to 3 monsters.  Ash just loves to catch 'em all, so he's good with anything.  The rest are quite particular.
+
+	\be
+		\item[(i)] Misty insists that we bring Mudkip and definitely not bring Blastoise.
+		\item[(ii)] Giovanni really doesn't want us to bring Sandshrew.
+		\item[(iii)] You think that if the team has Blastoise, we shouldn't bring Mudkip.
+		\item[(iv)] Brock thinks that we should bring Mudkip if and only if we also bring Pikachu or Sandshrew.
+	\ee
+	
+
+ Can we meet all of their standards?  Let $T(x)$ represent the propositional function ``monster $x$ is on our team,'' where the domain of $x$ is the 4 possible Pok\'emon we have available: Mudkip, Blastoise, Sandshrew, and Pikachu (or M, B, S, and P).	
+  
+	\be
+		\item Translate each of the 4 statements (i)-(iv) into a proposition, using the logical notation covered in class.
+		\item Is it possible to create a team under these conditions?  If this problem is satisfiable, what is that team or those teams?  If not, give a clear written argument explaining why or why not.  Do not use a truth table.
+	\ee
+
+	\begin{sol}
+		\begin{enumerate}
+			\item
+			\begin{itemize}
+				\item T$_1$ = $M \wedge \neg B$
+				
+				\item T$_2$ = $\neg S$
+				
+				\item T$_3$ = $(\neg B) \vee (B \wedge \neg M)$\\
+				Reducing using distribution\\
+				T$_3$ = $(B \vee \neg B) \wedge (\neg M \vee \neg B)$\\
+				$B \vee \neg B$ is always true\\
+				T$_3$ = $\neg M \vee \neg B$
+				
+				\item T$_4$ = $(\neg M) \vee (M \wedge (P \vee S))$\\
+				Reducing using distribution\\
+				T$_4$ = $(\neg M \vee M) \wedge (\neg M \vee (P \vee S))$\\
+				$M \vee \neg M$ is always true\\
+				T$_4$ = $(\neg M) \vee (P \vee S)$
+			\end{itemize}
+
+			\item Team = $T_1 \wedge T_2 \wedge T_3 \wedge T_4$\\
+
+			$T_1 \wedge T_3 = (M \wedge \neg B) \wedge (\neg M \vee \neg B)$\\
+			Distribute\\
+			$((M \wedge \neg B) \wedge (\neg M)) \vee ((M \wedge \neg B) \wedge (\neg B))$\\
+			$((M \wedge \neg B) \wedge (\neg M)) = ((M \wedge \neg M) \wedge (\neg B))$\\
+			$T_1 \wedge T_3 = (M \wedge \neg B) \wedge (\neg B)$\\
+			$T_1 \wedge T_3 = (M \wedge \neg B)$\\
+
+			$T_2 \wedge T_4 = (\neg S) \wedge (\neg M \vee (P \vee S))$\\
+			$T_2 \wedge T_4 = (\neg S) \wedge (S \vee (\neg M \vee P))$\\
+			$T_2 \wedge T_4 = ((\neg S) \wedge S) \vee ((\neg S) \wedge (\neg M \vee P))$\\
+			$\neg S \wedge S$ is always false\\
+			$T_2 \wedge T_4 = (\neg S) \wedge (\neg M \vee P)$\\
+
+			$T_1 \wedge T_2 \wedge T_3 \wedge T_4 = (T_1 \wedge T_3) \wedge (T_2 \wedge T_4)$\\
+			$= (M \wedge \neg B) \wedge ((\neg S) \wedge (\neg M \vee P))$\\
+			Distribute\\
+			$= (\neg S) \wedge (((M \wedge \neg B) \wedge (\neg M)) \vee ((M \wedge \neg B) \wedge P))$\\
+			$(M \wedge \neg B) \wedge \neg M$ is always false\\
+			$= (\neg S) \wedge ((M \wedge \neg B) \wedge P)$\\
+			$= (\neg S) \wedge (M) \wedge (\neg B) \wedge (P)$\\
+			\bfseries{Team will have Mudkip and Pikachu, and leave Blastoise and Sandshrew at home.}\\
+		\end{enumerate}
+	\end{sol}
+\ee
+\end{document}

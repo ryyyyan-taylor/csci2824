@@ -1,0 +1,6 @@
+\be
+\item Assuming the 3 lists are inputted correctly, the code would perform $5n^2$ comparisions in total, as there are 5 comparisons with in a nested for loop iterating $n$ times.
+\item Defining the 'winner' variable as 'a tie' at the beginning saves one comparison, then you simply reassign it if either of the Jedi do win. This would take the comparisons in each loop down to 4. The code would end up looking something like:\\
+\includegraphics[width=.6\textwidth]{newCode}
+\item I agree with taking lightsaber color into account, but everyone knows that the coolest lightsaber color is yellow, therefore that should be the winning color. Instead of height, the rank of the Jedi in question should determine who would win in every other case, with the highest rank Jedi winning and a tie resulting if two Jedi are the same rank.
+\ee

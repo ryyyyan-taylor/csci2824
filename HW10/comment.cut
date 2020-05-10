@@ -1,0 +1,27 @@
+\be
+\item Characteristic polynomial : $\mathbf{x^2 - 2x - 3}$
+
+\item $\therefore$ characteristic equation : $x = -1, 3\\
+\mathbf{a_{n}^{(h)} = c_1 (-1)^n + c_2 (3)^n}$
+
+\item Because RHS is $n^2$, we assume the particular solution as:\\
+$\mathbf{a_{n}^{(p)} = An^2 + Bn + C}$
+
+\item Plugging into each other :\\
+$n^2 = (An^2 + Bn + C) - 2(A(n-1)^2 + B(n-1) + C) - 3(A(n-2)^2 + B(n-2) + C)$\\
+-or-\\
+$n^2 = -4An^2 + (-4B + 16A)n + (-4C + 8B - 14A)$\\
+Comparing both sides :\\
+$-4A = 1 \rightarrow A = -\frac{1}{4}\\
+-4B + 16A = 0 \rightarrow B = 4A = 1\\
+-4C + 8B - 14A = 0 \rightarrow C = \frac{1}{4}(8B - 14A) = \frac{-9}{8}\\
+\therefore a_{n}^{(p)} = -\frac{1}{4}n^2 - n - \frac{9}{8}\\
+\therefore$ general solution:\\
+$\mathbf{a_n = a_{n}^{(h)} + a_{n}^{(p)} = c_1(1)^n + c_2(3)^n -\frac{1}{4}n^2 - n - \frac{9}{8}}$
+
+\item Using initial conditions :\\
+$a_0 = c_1 + c_2 - \frac{9}{8} = 0 \rightarrow c_1 + c_2 = \frac{9}{8}\\
+a_1 = -c_1 + 3c_2 - \frac{1}{4} - 1 - \frac{9}{8} = 7 \rightarrow -c_1 + 3c_2 = \frac{75}{8}\\
+\therefore c_1 = \frac{-3}{2}, c_2 = \frac{21}{8}\\
+\therefore \mathbf{a_n = \frac{-3}{2}(-1)^n + \frac{21}{8}(3)^n - \frac{1}{4}n^2 - n - \frac{9}{8}}$
+\ee
